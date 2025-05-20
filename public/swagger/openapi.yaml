@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: Benutzer-API
+  description: Beispiel-API für Benutzerverwaltung
+  version: 1.0.0
+
+servers:
+  - url: http://localhost/api
+    description: Lokale Entwicklungsumgebung
+
+paths:
+  /example:
+    get:
+      summary: Alle Benutzer abrufen
+      tags:
+        - Example
+      responses:
+        '200':
+          description: Erfolgreich
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Example'
+
+    post:
+      summary: Neuen Benutzer erstellen
+      tags:
+        - Example
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExampleInput'
+      responses:
+        '201':
+          description: Benutzer erstellt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+
+  /example/{id}:
+    get:
+      summary: Einzelnen Benutzer abrufen
+      tags:
+        - Example
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreich
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        '404':
+          description: Nicht gefunden
+
+components:
+  schemas:
+    Example:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Max Mustermann
+        email:
+          type: string
+          format: email
+          example: max@example.com
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    ExampleInput:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+          example: Max Mustermann
+        email:
+          type: string
+          format: email
+          example: max@example.com
