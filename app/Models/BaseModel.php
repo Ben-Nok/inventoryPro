@@ -15,7 +15,7 @@ class BaseModel extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            if ($this->primaryKey === 'uuid') {
+            if ($model->primaryKey === 'uuid') {
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
