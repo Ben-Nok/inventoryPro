@@ -21,7 +21,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid()->primary();
             $table->foreignUuid('product_id')->constrained('products', 'uuid');
-            $table->foreignUuid('alert_id');
+            $table->uuid('alert_id');
             $table->string('type');
             $table->string('message');
             $table->string('status');
