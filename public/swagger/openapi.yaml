@@ -24,7 +24,7 @@ paths:
             schema:
               $ref: '#/components/schemas/ProductCreate'
       responses:
-        '201':
+        '200':
           description: Product created successfully
           content:
             application/json:
@@ -110,7 +110,7 @@ paths:
             schema:
               $ref: '#/components/schemas/StorageCreate'
       responses:
-        '201':
+        '200':
           description: Storage location created successfully
           content:
             application/json:
@@ -213,6 +213,7 @@ components:
         updated_at:
           type: string
           format: date-time
+
     ProductCreate:
       type: object
       required:
@@ -226,6 +227,13 @@ components:
           type: string
         sku:
           type: string
+        storage_id:
+          type: string
+        quantity:
+          type: integer
+        alert_at_quantity:
+          type: integer
+
     ProductUpdate:
       type: object
       properties:
@@ -252,6 +260,7 @@ components:
         updated_at:
           type: string
           format: date-time
+
     StorageCreate:
       type: object
       required:
@@ -262,6 +271,7 @@ components:
           type: string
         location:
           type: string
+
     StorageUpdate:
       type: object
       properties:
