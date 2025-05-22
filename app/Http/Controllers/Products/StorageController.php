@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Products;
 
 use Illuminate\Routing\Controller;
 
-class ProductController extends Controller
+class StorageController extends Controller
 {
 
 }

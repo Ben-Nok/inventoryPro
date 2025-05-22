@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class BaseModel extends Model
 {
     protected $primaryKey = 'uuid';
+    public $incrementing = false;
     protected $keyType = 'string';
 
     public static function boot(): void

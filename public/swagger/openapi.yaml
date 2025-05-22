@@ -1,100 +1,271 @@
 openapi: 3.0.3
 info:
-  title: Benutzer-API
-  description: Beispiel-API für Benutzerverwaltung
+  title: InventoryPro-API
+  description: Inventory Management Software
   version: 1.0.0
 
 servers:
   - url: http://localhost/api
-    description: Lokale Entwicklungsumgebung
+    description: local dev environment
+
+
 
 paths:
-  /example:
-    get:
-      summary: Alle Benutzer abrufen
-      tags:
-        - Example
-      responses:
-        '200':
-          description: Erfolgreich
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Example'
-
+  /products:
     post:
-      summary: Neuen Benutzer erstellen
+      summary: Create a new product
       tags:
-        - Example
+        - Products
+      description: Adds a new product to the system.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ExampleInput'
+              $ref: '#/components/schemas/ProductCreate'
       responses:
         '201':
-          description: Benutzer erstellt
+          description: Product created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Example'
-
-  /example/{id}:
+                $ref: '#/components/schemas/Product'
     get:
-      summary: Einzelnen Benutzer abrufen
+      summary: Get all products
       tags:
-        - Example
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
+        - Products
+      description: Retrieves a list of all products in the inventory.
       responses:
         '200':
-          description: Erfolgreich
+          description: A list of products
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Example'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+  /products/{id}:
+    get:
+      summary: Get product details
+      tags:
+        - Products
+      description: Retrieves detailed information about a specific product by its UUID.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Product found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
         '404':
-          description: Nicht gefunden
+          description: Product not found
+    put:
+      summary: Update a product
+      tags:
+        - Products
+      description: Updates the details of a specific product by its UUID.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdate'
+      responses:
+        '200':
+          description: Product updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+    delete:
+      summary: Delete a product
+      tags:
+        - Products
+      description: Deletes a product from the inventory, including its stock.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Product deleted successfully
+        '404':
+          description: Product not found
+
+  /storages:
+    post:
+      summary: Create a new storage location
+      tags:
+        - Storages
+      description: Adds a new storage location to the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StorageCreate'
+      responses:
+        '201':
+          description: Storage location created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Storage'
+    get:
+      summary: Get all storage locations
+      tags:
+        - Storages
+      description: Retrieves a list of all storage locations.
+      responses:
+        '200':
+          description: A list of storage locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Storage'
+
+  /storages/{id}:
+    get:
+      summary: Get storage location details
+      tags:
+        - Storages
+      description: Retrieves detailed information about a specific storage location by its UUID.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Storage found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Storage'
+        '404':
+          description: Storage not found
+    put:
+      summary: Update a storage location
+      tags:
+        - Storages
+      description: Updates the details of a specific storage location.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StorageUpdate'
+      responses:
+        '200':
+          description: Storage updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Storage'
+        '404':
+          description: Storage not found
+    delete:
+      summary: Delete a storage location
+      tags:
+        - Storages
+      description: Deletes a storage location from the system.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Storage deleted successfully
+        '404':
+          description: Storage not found
 
 components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: UUID of the resource (product or storage)
+      schema:
+        type: string
+        format: uuid
+
   schemas:
-    Example:
+    Product:
       type: object
       properties:
-        id:
-          type: integer
-          example: 1
+        uuid:
+          type: string
+          format: uuid
         name:
           type: string
-          example: Max Mustermann
-        email:
+        description:
           type: string
-          format: email
-          example: max@example.com
+        sku:
+          type: string
         created_at:
           type: string
           format: date-time
         updated_at:
           type: string
           format: date-time
-
-    ExampleInput:
+    ProductCreate:
       type: object
       required:
         - name
-        - email
+        - description
+        - sku
       properties:
         name:
           type: string
-          example: Max Mustermann
-        email:
+        description:
           type: string
-          format: email
-          example: max@example.com
+        sku:
+          type: string
+    ProductUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        sku:
+          type: string
+
+    Storage:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        location:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    StorageCreate:
+      type: object
+      required:
+        - name
+        - location
+      properties:
+        name:
+          type: string
+        location:
+          type: string
+    StorageUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        location:
+          type: string
