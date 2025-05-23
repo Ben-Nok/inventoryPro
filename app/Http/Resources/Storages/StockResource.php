@@ -18,8 +18,8 @@ class StockResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'storage_id' => $this->storage_id,
-            'product_id' => $this->product_id,
+            'storage_uuid' => $this->storage_uuid,
+            'product_uuid' => $this->product_uuid,
             'quantity' => $this->quantity,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

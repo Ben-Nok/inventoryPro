@@ -3,13 +3,15 @@
 namespace App\Models\Products;
 
 use App\Models\BaseModel;
+use App\Models\Storages\Stock;
 use Database\Factories\Products\ProductFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property string $uuid
  * @property string $name
@@ -40,4 +42,12 @@ class Product extends BaseModel
         'description',
         'sku',
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function stock(): HasMany
+    {
+        return $this->hasMany(Stock::class);
+    }
 }

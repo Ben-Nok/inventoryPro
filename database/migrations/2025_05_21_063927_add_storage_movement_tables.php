@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->foreignUuid('storage_id')->constrained('storages', 'uuid');
-            $table->foreignUuid('product_id')->constrained('products', 'uuid');
+            $table->foreignUuid('storage_uuid')->constrained('storages', 'uuid');
+            $table->foreignUuid('product_uuid')->constrained('products', 'uuid');
             $table->integer('quantity');
             $table->timestamps();
         });
 
         Schema::create('storage_movements', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->foreignUuid('storage_id')->constrained('storages', 'uuid');
-            $table->foreignUuid('product_id')->constrained('products', 'uuid');
+            $table->foreignUuid('storage_uuid')->constrained('storages', 'uuid');
+            $table->foreignUuid('product_uuid')->constrained('products', 'uuid');
             $table->enum('movement', ['in', 'out']);
             $table->integer('quantity');
             $table->timestamps();

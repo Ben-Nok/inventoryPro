@@ -6,10 +6,11 @@ use App\Models\BaseModel;
 use Database\Factories\Storages\StorageFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property string $uuid
  * @property string $name
@@ -37,4 +38,9 @@ class Storage extends BaseModel
         'name',
         'location',
     ];
+
+    public function stock(): HasMany
+    {
+        return $this->hasMany(Stock::class);
+    }
 }

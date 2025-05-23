@@ -12,7 +12,7 @@ use Illuminate\Support\Carbon;
  *
  *
  * @property string $uuid
- * @property string $product_id
+ * @property string $product_uuid
  * @property string $alert_at_quantity
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -31,11 +31,10 @@ class ProductAlert extends BaseModel
 {
     use HasFactory;
 
-    protected $table = 'product_alert';
+    protected $table = 'product_alerts';
 
     protected $fillable = [
-        'product_id',
-        'alert_id',
+        'product_uuid',
         'alert_at_quantity',
     ];
 

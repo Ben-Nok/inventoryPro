@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('product_alerts', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->foreignUuid('product_id')->constrained('products', 'uuid');
+            $table->foreignUuid('product_uuid')->constrained('products', 'uuid');
             $table->integer('alert_at_quantity')->default(0);
             $table->timestamps();
         });
 
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->foreignUuid('product_id')->constrained('products', 'uuid');
-            $table->uuid('alert_id');
+            $table->foreignUuid('product_uuid')->constrained('products', 'uuid');
+            $table->uuid('alert_uuid');
             $table->string('type');
             $table->string('message');
             $table->string('status');

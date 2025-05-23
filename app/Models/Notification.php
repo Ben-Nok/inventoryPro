@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property string $uuid
- * @property string $product_id
- * @property string $alert_id
+ * @property string $product_uuid
+ * @property string $alert_uuid
  * @property string $type
  * @property string $message
  * @property string $status

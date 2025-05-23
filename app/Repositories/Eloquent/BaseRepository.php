@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\Repositories\Contracts\BaseRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 abstract class BaseRepository implements BaseRepositoryInterface
 {
@@ -31,6 +32,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     /**
      * @param string $id
      * @return Model|null
+     * @throws ModelNotFoundException
      */
     public function find(string $id): ?Model
     {

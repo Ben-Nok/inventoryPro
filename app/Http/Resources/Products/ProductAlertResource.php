@@ -18,10 +18,10 @@ class ProductAlertResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'productId' => $this->product_id,
-            'alertAtQuantity' => $this->alert_at_quantity,
-            'createdAt' => $this->created_at,
-            'updatedAt' => $this->updated_at,
+            'product_uuid' => $this->product_uuid,
+            'alert_at_quantity' => $this->alert_at_quantity,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

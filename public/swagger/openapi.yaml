@@ -227,7 +227,7 @@ components:
           type: string
         sku:
           type: string
-        storage_id:
+        storage_uuid:
           type: string
         quantity:
           type: integer

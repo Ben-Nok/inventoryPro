@@ -6,14 +6,15 @@ use App\Models\BaseModel;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
  *
  *
  * @property string $uuid
- * @property string $product_id
- * @property string $storage_id
+ * @property string $product_uuid
+ * @property string $storage_uuid
  * @property int $quantity
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -32,11 +33,16 @@ class Stock extends BaseModel
 {
     use HasFactory;
 
-    protected $table = 'stock';
+    protected $table = 'stocks';
 
     protected $fillable = [
-        'storage_id',
-        'product_id',
+        'storage_uuid',
+        'product_uuid',
         'quantity',
     ];
+
+    public function storage(): BelongsTo
+    {
+        return $this->belongsTo(Storage::class);
+    }
 }

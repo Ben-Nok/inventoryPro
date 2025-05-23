@@ -13,8 +13,8 @@ use Illuminate\Support\Carbon;
  *
  *
  * @property string $uuid
- * @property string $product_id
- * @property string $storage_id
+ * @property string $product_uuid
+ * @property string $storage_uuid
  * @property string $movement
  * @property int $quantity
  * @property Carbon|null $created_at
@@ -39,8 +39,8 @@ class StorageMovement extends BaseModel
     protected $table = 'storage_movement';
 
     protected $fillable = [
-        'storage_id',
-        'product_id',
+        'storage_uuid',
+        'product_uuid',
         'movement',
         'quantity',
     ];

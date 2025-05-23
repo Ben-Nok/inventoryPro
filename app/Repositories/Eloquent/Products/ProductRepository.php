@@ -11,4 +11,15 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function __construct(Product $model) {
         parent::__construct($model);
     }
+
+    /**
+     * @param string $id
+     * @return Product|null
+     */
+    public function productWithStackAndStorage (string $id): ?Product
+    {
+        $product = Product::with('stock.storage')->find($id);
+
+        return $product;
+    }
 }
