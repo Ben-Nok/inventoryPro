@@ -21,7 +21,7 @@ use Ramsey\Collection\Collection;
  * @property string $sku
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property Collection<int, Stock> $stock
+ * @property Collection<Stock> $stock
  * @method static ProductFactory factory($count = null, $state = [])
  * @method static Builder<static>|Product newModelQuery()
  * @method static Builder<static>|Product newQuery()
