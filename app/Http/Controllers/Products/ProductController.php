@@ -111,6 +111,7 @@ class ProductController extends Controller
     /**
      * @param string $id
      * @return JsonResponse
+     * @throws ValidationException
      */
     public function delete(string $id): JsonResponse
     {

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class StorageController extends Controller
 {
@@ -82,6 +83,26 @@ class StorageController extends Controller
             return response()->json($this->storageService->update($request, $id));
         } catch (ModelNotFoundException) {
             return response()->json(['message' => 'Could not update: Storage not found'], 404);
+        }
+    }
+
+    /**
+     * @param string $id
+     * @return JsonResponse
+     * @throws ValidationException
+     */
+    public function delete(string $id): JsonResponse
+    {
+        Validator::make(['id' => $id], [
+            'id' => 'required|uuid',
+        ])->validate();
+
+        try {
+            return response()->json($this->storageService->delete($id));
+        } catch (ModelNotFoundException) {
+            return response()->json(['message' => 'Storage not found'], 404);
+        } catch (BadRequestException $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
         }
     }
 }
