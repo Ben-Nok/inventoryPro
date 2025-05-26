@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface ProductRepositoryInterface extends BaseRepositoryInterface
 {
-    public function productWithStackAndStorage (string $id): ?Product;
+    public function productWithStockAndStorage (string $id): ?Product;
 }

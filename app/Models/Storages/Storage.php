@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 /**
  *
@@ -17,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property string $location
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property Collection<int, Stock> $stock
  * @method static StorageFactory factory($count = null, $state = [])
  * @method static Builder<static>|Storage newModelQuery()
  * @method static Builder<static>|Storage newQuery()

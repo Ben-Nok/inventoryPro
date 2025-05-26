@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Products;
 
-use App\Http\Resources\Products\ProductAlertResource;
-use App\Http\Resources\Products\ProductResource;
 use App\Http\Resources\Storages\StockResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 

@@ -192,7 +192,6 @@ components:
       description: UUID of the resource (product or storage)
       schema:
         type: string
-        format: uuid
 
   schemas:
     Product:

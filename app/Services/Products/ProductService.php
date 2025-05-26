@@ -39,7 +39,7 @@ readonly class ProductService
      */
     public function store(Request $request): array|string
     {
-        if (!$request->exists('storage_uuid')) {
+        if ($request->exists('storage_uuid')) {
             $this->storageRepository->find($request->input('storage_uuid'));
         }
         if ($request->exists('quantity') && empty($request->input('storage_uuid'))) {
@@ -68,7 +68,7 @@ readonly class ProductService
                 $stockData = [
                     'storage_uuid' => $request->input('storage_uuid'),
                     'product_uuid' => $product->uuid,
-                    'quantity' => $request->input('quantity'),
+                    'quantity' => $request->input('quantity') ?? 0,
                 ];
                 /** @var Stock $stock */
                 $stock = $this->stockRepository->create($stockData);
@@ -97,9 +97,37 @@ readonly class ProductService
     /**
      * @param string $id
      * @return Product|null
+     * @throws ModelNotFoundException
      */
     public function show(string $id): ?Product
     {
-        return $this->productRepository->productWithStackAndStorage($id);
+        return $this->productRepository->productWithStockAndStorage($id);
+    }
+
+    /**
+     * @param Request $request
+     * @param string $id
+     * @return Product|null
+     * @throws ModelNotFoundException
+     */
+    public function update(Request $request, string $id): ?Product
+    {
+        return $this->productRepository->update($id, $request->all());
+    }
+
+    /**
+     * @param string $id
+     * @return bool
+     * @throws ModelNotFoundException|BadRequestException
+     */
+    public function delete(string $id): bool
+    {
+        $product = $this->productRepository->find($id);
+        $stockCount = $this->stockRepository->where('product_uuid', $id)->count();
+        if ($stockCount > 0) {
+            throw new BadRequestException('cannot delete product with stock', 400);
+        }
+        $product->delete();
+        return true;
     }
 }

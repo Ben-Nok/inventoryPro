@@ -16,10 +16,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
      * @param string $id
      * @return Product|null
      */
-    public function productWithStackAndStorage (string $id): ?Product
+    public function productWithStockAndStorage (string $id): ?Product
     {
-        $product = Product::with('stock.storage')->find($id);
-
-        return $product;
+        return Product::with('stock.storage')->find($id);
     }
 }

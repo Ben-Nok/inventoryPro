@@ -5,10 +5,12 @@ namespace App\Models\Products;
 use App\Models\BaseModel;
 use App\Models\Storages\Stock;
 use Database\Factories\Products\ProductFactory;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Ramsey\Collection\Collection;
 
 /**
  *
@@ -19,6 +21,7 @@ use Illuminate\Support\Carbon;
  * @property string $sku
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property Collection<int, Stock> $stock
  * @method static ProductFactory factory($count = null, $state = [])
  * @method static Builder<static>|Product newModelQuery()
  * @method static Builder<static>|Product newQuery()
@@ -29,7 +32,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Product whereSku($value)
  * @method static Builder<static>|Product whereUpdatedAt($value)
  * @method static Builder<static>|Product whereUuid($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Product extends BaseModel
 {

@@ -68,4 +68,14 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         return $this->find($id)->delete();
     }
+
+    /**
+     * @param string $column
+     * @param mixed $value
+     * @return Collection<int, Model>
+     */
+    public function where(string $column, mixed $value): Collection
+    {
+        return $this->model->newQuery()->where($column, $value)->get();
+    }
 }
