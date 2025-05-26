@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers;
 
 use App\Http\Resources\Products\ProductCreateResource;
 use App\Http\Resources\Products\ProductResource;

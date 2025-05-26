@@ -62,7 +62,7 @@ paths:
                 $ref: '#/components/schemas/Product'
         '404':
           description: Product not found
-    put:
+    patch:
       summary: Update a product
       tags:
         - Products
@@ -148,7 +148,7 @@ paths:
                 $ref: '#/components/schemas/Storage'
         '404':
           description: Storage not found
-    put:
+    patch:
       summary: Update a storage location
       tags:
         - Storages

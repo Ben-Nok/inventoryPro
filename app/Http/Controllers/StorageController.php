@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers;
 
 use App\Services\Storages\StorageService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
