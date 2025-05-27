@@ -58,7 +58,7 @@ readonly class StorageService
      */
     public function update(Request $request, string $id): ?Storage
     {
-        return $this->storageRepository->update($id, [$request->all()]);
+        return $this->storageRepository->update($id, $request->all());
     }
 
     /**

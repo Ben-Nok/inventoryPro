@@ -64,7 +64,7 @@ paths:
         - Products
       description: Retrieves detailed information about a specific product by its UUID.
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/ProductId'
       responses:
         '200':
           description: Product found
@@ -84,7 +84,7 @@ paths:
         - Products
       description: Updates the details of a specific product by its UUID.
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/ProductId'
       requestBody:
         required: true
         content:
@@ -110,7 +110,7 @@ paths:
         - Products
       description: Deletes a product from the inventory, including its stock.
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/ProductId'
       responses:
         '200':
           description: Product deleted successfully
@@ -174,7 +174,7 @@ paths:
         - Storages
       description: Retrieves detailed information about a specific storage by its UUID.
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StorageId'
       responses:
         '200':
           description: Storage found
@@ -194,7 +194,7 @@ paths:
         - Storages
       description: Updates the details of a specific storage location.
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StorageId'
       requestBody:
         required: true
         content:
@@ -220,7 +220,7 @@ paths:
         - Storages
       description: Deletes a storage location from the system.
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StorageId'
       responses:
         '200':
           description: Storage deleted successfully
@@ -286,7 +286,7 @@ paths:
       tags:
         - Inventory
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/ProductId'
       responses:
         200:
           description: inventory retrieved successfully
@@ -308,7 +308,7 @@ paths:
       tags:
         - Inventory
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StorageId'
       responses:
         200:
           description: storage inventory retrieved successfully
@@ -325,11 +325,18 @@ paths:
 
 components:
   parameters:
-    PathId:
+    StorageId:
       name: id
       in: path
       required: true
-      description: UUID of a product or storage
+      description: UUID of a storage
+      schema:
+        type: string
+    ProductId:
+      name: id
+      in: path
+      required: true
+      description: UUID of a product
       schema:
         type: string
 
