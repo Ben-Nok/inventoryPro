@@ -22,8 +22,8 @@ Route::prefix('storages')->group(function () {
 });
 
 Route::prefix('inventory')->group(function () {
-    Route::get('/', [InventoryController::class, 'index']);
     Route::post('/', [InventoryController::class, 'store']);
+    Route::get('/', [InventoryController::class, 'index']);
     Route::get('/product/{id}', [InventoryController::class, 'show']);
     Route::get('/storage/{id}', [InventoryController::class, 'show']);
 });

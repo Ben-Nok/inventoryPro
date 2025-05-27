@@ -24,7 +24,7 @@ paths:
             schema:
               $ref: '#/components/schemas/ProductCreate'
       responses:
-        '200':
+        '201':
           description: Product created successfully
           content:
             application/json:
@@ -134,7 +134,7 @@ paths:
             schema:
               $ref: '#/components/schemas/StorageCreate'
       responses:
-        '200':
+        '201':
           description: Storage location created successfully
           content:
             application/json:
@@ -248,7 +248,7 @@ paths:
             type: integer
             minimum: 1
       responses:
-        200:
+        201:
           description: Stock changed successfully
           content:
             application/json:
@@ -282,7 +282,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
   /inventory/product/{id}:
     get:
-      summary: retrieve the Inventory and of a specific product.
+      summary: retrieve the Inventory of a specific product.
       description: retrieve the stock, storage locations and details of a specific product.
       tags:
         - Inventory
@@ -303,7 +303,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
   /inventory/storage/{id}:
     get:
-      summary: retrieve the Inventory and of a specific storage.
+      summary: retrieve the Inventory of a specific storage.
       description: retrieve the stocked products and details of a specific storage.
       tags:
         - Inventory
@@ -353,7 +353,10 @@ components:
       name: movement_type
       in: query
       required: true
-      description: in = product stock was added to a storage; out = product stock was removed from a storage
+      description: >
+        Movement Types: <br>
+        in = product stock was added to a storage <br>
+        out = product stock was removed from a storage
       schema:
         type: string
         enum: [in, out]
