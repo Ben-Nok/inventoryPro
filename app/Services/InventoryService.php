@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Inventory;
+namespace App\Services;
 
 use App\Enums\MovementTypes;
 use App\Models\Products\Product;

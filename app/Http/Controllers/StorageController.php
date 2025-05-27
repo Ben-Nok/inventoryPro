@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Storages\StorageService;
+use App\Http\Resources\Storages\StorageListResource;
+use App\Http\Resources\Storages\StorageResource;
+use App\Services\StorageService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,9 +24,9 @@ class StorageController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return StorageListResource
      */
-    public function store(Request $request): JsonResponse
+    public function store(Request $request): StorageListResource
     {
         $request->validate([
             'name' => 'required|string',
@@ -33,7 +35,7 @@ class StorageController extends Controller
 
         $storage = $this->storageService->store($request);
 
-        return response()->json($storage);
+        return StorageListResource::make($storage);
     }
 
     /**
@@ -46,17 +48,18 @@ class StorageController extends Controller
 
     /**
      * @param string $id
-     * @return JsonResponse
+     * @return StorageResource|JsonResponse
      * @throws ValidationException
      */
-    public function show(string $id): JsonResponse
+    public function show(string $id): StorageResource|JsonResponse
     {
         Validator::make(['id' => $id], [
             'id' => 'required|uuid',
         ])->validate();
 
         try {
-            return response()->json($this->storageService->show($id));
+            $storage = $this->storageService->show($id);
+            return StorageResource::make($storage);
         } catch (ModelNotFoundException) {
             return response()->json(['message' =>'Storage not found'], 404);
         }
@@ -65,10 +68,10 @@ class StorageController extends Controller
     /**
      * @param Request $request
      * @param string $id
-     * @return JsonResponse
+     * @return StorageResource|JsonResponse
      * @throws ValidationException
      */
-    public function update(Request $request, string $id): JsonResponse
+    public function update(Request $request, string $id): StorageResource|JsonResponse
     {
         Validator::make(['id' => $id], [
             'id' => 'required|uuid',
@@ -80,7 +83,8 @@ class StorageController extends Controller
         ]);
 
         try {
-            return response()->json($this->storageService->update($request, $id));
+            $storage = $this->storageService->update($request, $id);
+            return StorageResource::make($storage);
         } catch (ModelNotFoundException) {
             return response()->json(['message' => 'Could not update: Storage not found'], 404);
         }

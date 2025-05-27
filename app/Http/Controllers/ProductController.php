@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Products\ProductCreateResource;
+use App\Http\Resources\Products\ProductListResource;
 use App\Http\Resources\Products\ProductResource;
-use App\Services\Products\ProductService;
+use App\Services\ProductService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\CssSelector\Exception\InternalErrorException;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
-use Throwable;
 
 class ProductController extends Controller
 {
@@ -25,12 +24,12 @@ class ProductController extends Controller
     }
 
     /**
-     * @return JsonResponse All products as a json response
+     * @return ProductListResource All products as a json response
      */
-    public function index(): JsonResponse
+    public function index(): ProductListResource
     {
-        // todo add resource
-        return response()->json($this->productService->getAllProducts());
+        $products = $this->productService->getAllProducts();
+        return ProductListResource::make($products);
     }
 
     /**

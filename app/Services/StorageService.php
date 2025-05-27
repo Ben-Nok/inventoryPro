@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Storages;
+namespace App\Services;
 
 use App\Models\Storages\Storage;
 use App\Repositories\Contracts\Storages\StockRepositoryInterface;
