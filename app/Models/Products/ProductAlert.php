@@ -3,6 +3,7 @@
 namespace App\Models\Products;
 
 use App\Models\BaseModel;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\Products\ProductAlertFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +26,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|ProductAlert whereProductId($value)
  * @method static Builder<static>|ProductAlert whereUpdatedAt($value)
  * @method static Builder<static>|ProductAlert whereUuid($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class ProductAlert extends BaseModel
 {

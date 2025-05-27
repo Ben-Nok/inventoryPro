@@ -3,6 +3,7 @@
 namespace App\Models\Storages;
 
 use App\Models\BaseModel;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\Storages\StorageFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,7 +29,7 @@ use Illuminate\Support\Collection;
  * @method static Builder<static>|Storage whereName($value)
  * @method static Builder<static>|Storage whereUpdatedAt($value)
  * @method static Builder<static>|Storage whereUuid($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Storage extends BaseModel
 {

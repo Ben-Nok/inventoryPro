@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,7 +39,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static Builder<static>|User wherePassword($value)
  * @method static Builder<static>|User whereRememberToken($value)
  * @method static Builder<static>|User whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class User extends Authenticatable
 {

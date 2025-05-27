@@ -12,4 +12,20 @@ class StockRepository extends BaseRepository implements StockRepositoryInterface
     {
         parent::__construct($model);
     }
+
+    /**
+     * @param string $storageId
+     * @param string $productId
+     * @return null|Stock
+     */
+    public function findStockInStorage(string $storageId, string $productId): ?Stock
+    {
+        /** @var Stock $stock */
+        $stock =  $this->model->newQuery()
+            ->where('storage_uuid', '=', $storageId)
+            ->where('product_uuid', '=', $productId)
+            ->first();
+
+        return $stock;
+    }
 }

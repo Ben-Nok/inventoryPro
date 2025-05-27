@@ -3,7 +3,7 @@
 namespace App\Models\Storages;
 
 use App\Models\BaseModel;
-use Eloquent;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\CssSelector\Exception\InternalErrorException;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Throwable;
-use Validator;
 
 class ProductController extends Controller
 {
@@ -31,35 +31,6 @@ class ProductController extends Controller
     {
         // todo add resource
         return response()->json($this->productService->getAllProducts());
-    }
-
-    /**
-     * @param Request $request
-     * @return ProductCreateResource|JsonResponse
-     * @throws Throwable
-     */
-    public function store(Request $request): ProductCreateResource|JsonResponse
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'sku' => 'required|string',
-            'storage_id' => 'string',
-            'quantity' => 'integer',
-            'alert_at_quantity' => 'integer',
-        ]);
-
-        try {
-            $product = $this->productService->store($request);
-        } catch (BadRequestException $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
-        } catch (ModelNotFoundException) {
-            return response()->json(['message' => 'Could not save: storage not found'], 404);
-        } catch (InternalErrorException $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
-
-            return ProductCreateResource::make($product);
     }
 
     /**
@@ -125,6 +96,8 @@ class ProductController extends Controller
             return response()->json(['message' => 'Product not found'], 404);
         } catch (BadRequestException $e) {
             return response()->json(['message' => $e->getMessage()], 400);
+        } catch (InternalErrorException $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
         }
     }
 }

@@ -230,23 +230,19 @@ paths:
           $ref: '#/components/responses/NotFoundError'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /inventory:
+
+  /inventory/movements:
     post:
       summary: create a new inventory movement
       tags:
         - Inventory
       description: removes or adds stock of a product in a storage
-      parameters:
-        - $ref: '#/components/parameters/ProductId'
-        - $ref: '#/components/parameters/StorageId'
-        - $ref: '#/components/parameters/MovementType'
-        - name: quantity
-          in: query
-          required: true
-          description: product quantity added or removed
-          schema:
-            type: integer
-            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovementsRequest'
       responses:
         201:
           description: Stock changed successfully
@@ -260,6 +256,8 @@ paths:
           $ref: '#/components/responses/NotFoundError'
         '500':
           $ref: '#/components/responses/InternalServerError'
+
+  /inventory:
     get:
       summary: Get complete inventory
       tags:
@@ -280,6 +278,7 @@ paths:
           $ref: '#/components/responses/NotFoundError'
         '500':
           $ref: '#/components/responses/InternalServerError'
+
   /inventory/product/{id}:
     get:
       summary: retrieve the Inventory of a specific product.
@@ -301,6 +300,7 @@ paths:
           $ref: '#/components/responses/NotFoundError'
         '500':
           $ref: '#/components/responses/InternalServerError'
+
   /inventory/storage/{id}:
     get:
       summary: retrieve the Inventory of a specific storage.
@@ -332,35 +332,6 @@ components:
       description: UUID of a product or storage
       schema:
         type: string
-
-    StorageId:
-      name: storage_id
-      in: query
-      required: true
-      description: UUID of a storage
-      schema:
-        type: string
-
-    ProductId:
-      name: product_id
-      in: query
-      required: true
-      description: UUID of a storage
-      schema:
-        type: string
-
-    MovementType:
-      name: movement_type
-      in: query
-      required: true
-      description: >
-        Movement Types: <br>
-        in = product stock was added to a storage <br>
-        out = product stock was removed from a storage
-      schema:
-        type: string
-        enum: [in, out]
-        default: out
 
   schemas:
     Product:
@@ -454,10 +425,10 @@ components:
         uuid:
           type: string
           format: uuid
-        product_id:
+        product_uuid:
           type: string
           format: uuid
-        storage_id:
+        storage_uuid:
           type: string
           format: uuid
         quantity:
@@ -497,10 +468,10 @@ components:
         uuid:
           type: string
           format: uuid
-        product_id:
+        product_uuid:
           type: string
           format: uuid
-        storage_id:
+        storage_uuid:
           type: string
           format: uuid
         movement:
@@ -515,6 +486,34 @@ components:
         updated_at:
           type: string
           format: date-time
+
+    MovementsRequest:
+      type: object
+      properties:
+        product_uuid:
+          type: string
+          description: UUID of a product
+        storage_uuid:
+          type: string
+          description: UUID of a storage
+        movement:
+          type: string
+          enum: [ in, out ]
+          default: out
+          description: >
+            Movement Types:
+            `in` = product stock was added to a storage
+            `out` = product stock was removed from a storage
+        quantity:
+          type: integer
+          minimum: 1
+          description: Product quantity added or removed
+      required:
+        - product_uuid
+        - storage_uuid
+        - movement
+        - quantity
+
     ErrorResponse:
       type: object
       properties:

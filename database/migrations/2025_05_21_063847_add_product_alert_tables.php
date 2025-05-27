@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,14 +12,14 @@ return new class extends Migration
     {
         Schema::create('product_alerts', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->foreignUuid('product_uuid')->constrained('products', 'uuid');
+            $table->foreignUuid('product_uuid')->constrained('products', 'uuid')->onDelete('cascade');
             $table->integer('alert_at_quantity')->default(0);
             $table->timestamps();
         });
 
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->foreignUuid('product_uuid')->constrained('products', 'uuid');
+            $table->foreignUuid('product_uuid')->constrained('products', 'uuid')->onDelete('cascade');
             $table->uuid('alert_uuid');
             $table->string('type');
             $table->string('message');

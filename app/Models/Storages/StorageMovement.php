@@ -3,8 +3,8 @@
 namespace App\Models\Storages;
 
 use App\Models\BaseModel;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\Storages\StorageMovementFactory;
-use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
@@ -24,19 +24,19 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|StorageMovement newQuery()
  * @method static Builder<static>|StorageMovement query()
  * @method static Builder<static>|StorageMovement whereCreatedAt($value)
- * * @method static Builder<static>|StorageMovement whereMovement($value)
- * * @method static Builder<static>|StorageMovement whereProductId($value)
- * * @method static Builder<static>|StorageMovement whereQuantity($value)
- * * @method static Builder<static>|StorageMovement whereStorageId($value)
- * * @method static Builder<static>|StorageMovement whereUpdatedAt($value)
- * * @method static Builder<static>|StorageMovement whereUuid($value)
+ * @method static Builder<static>|StorageMovement whereMovement($value)
+ * @method static Builder<static>|StorageMovement whereProductId($value)
+ * @method static Builder<static>|StorageMovement whereQuantity($value)
+ * @method static Builder<static>|StorageMovement whereStorageId($value)
+ * @method static Builder<static>|StorageMovement whereUpdatedAt($value)
+ * @method static Builder<static>|StorageMovement whereUuid($value)
  * @mixin Eloquent
  */
 class StorageMovement extends BaseModel
 {
     use HasFactory;
 
-    protected $table = 'storage_movement';
+    protected $table = 'storage_movements';
 
     protected $fillable = [
         'storage_uuid',

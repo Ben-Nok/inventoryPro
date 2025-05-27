@@ -4,8 +4,8 @@ namespace App\Models\Products;
 
 use App\Models\BaseModel;
 use App\Models\Storages\Stock;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\Products\ProductFactory;
-use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;

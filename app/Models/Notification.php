@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\NotificationFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,7 +31,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Notification whereType($value)
  * @method static Builder<static>|Notification whereUpdatedAt($value)
  * @method static Builder<static>|Notification whereUuid($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Notification extends BaseModel
 {

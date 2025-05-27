@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index']);
-    Route::post('/', [ProductController::class, 'store']);
+    Route::post('/', [InventoryController::class, 'store']);
     Route::get('/{id}', [ProductController::class, 'show']);
     Route::patch('/{id}', [ProductController::class, 'update']);
     Route::delete('/{id}', [ProductController::class, 'delete']);
@@ -22,8 +22,8 @@ Route::prefix('storages')->group(function () {
 });
 
 Route::prefix('inventory')->group(function () {
-    Route::post('/', [InventoryController::class, 'store']);
+    Route::post('/movements', [InventoryController::class, 'movement']);
     Route::get('/', [InventoryController::class, 'index']);
-    Route::get('/product/{id}', [InventoryController::class, 'show']);
-    Route::get('/storage/{id}', [InventoryController::class, 'show']);
+    Route::get('/product/{id}', [InventoryController::class, 'showProduct']);
+    Route::get('/storage/{id}', [InventoryController::class, 'showStorage']);
 });
