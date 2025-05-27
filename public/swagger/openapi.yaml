@@ -231,26 +231,6 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
   /inventory:
-    get:
-      summary: Get complete inventory
-      tags:
-        - Inventory
-      description: Retrieve a list of the complete inventory
-      responses:
-        200:
-          description: Inventory retrieved successfully
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Inventory"
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
     post:
       summary: create a new inventory movement
       tags:
@@ -273,7 +253,27 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/StorageMovement'
+                $ref: '#/components/schemas/StorageMovement'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      summary: Get complete inventory
+      tags:
+        - Inventory
+      description: Retrieve a list of the complete inventory
+      responses:
+        200:
+          description: Inventory retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Inventory"
         '400':
           $ref: '#/components/responses/BadRequestError'
         '404':
