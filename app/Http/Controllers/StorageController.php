@@ -24,9 +24,9 @@ class StorageController extends Controller
 
     /**
      * @param Request $request
-     * @return StorageListResource
+     * @return StorageResource
      */
-    public function store(Request $request): StorageListResource
+    public function store(Request $request): StorageResource
     {
         $request->validate([
             'name' => 'required|string',
@@ -35,7 +35,7 @@ class StorageController extends Controller
 
         $storage = $this->storageService->store($request);
 
-        return StorageListResource::make($storage);
+        return StorageResource::make($storage);
     }
 
     /**
